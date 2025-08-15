@@ -148,3 +148,235 @@ export const SUCCESS_MESSAGES = {
   DATA_SAVED: '数据保存成功',
   REPORT_EXPORTED: '报告导出成功'
 } as const
+
+// ===================== 逻辑门相关配置 =====================
+
+// 逻辑门类型配置
+export const LOGIC_GATE_TYPES = {
+  AND: {
+    label: '与门',
+    symbol: '&',
+    description: '所有输入为真时输出为真',
+    color: '#409EFF'
+  },
+  OR: {
+    label: '或门', 
+    symbol: '∨',
+    description: '任一输入为真时输出为真',
+    color: '#67C23A'
+  },
+  NOT: {
+    label: '非门',
+    symbol: '¬', 
+    description: '输入取反',
+    color: '#E6A23C'
+  }
+} as const
+
+// 逻辑门状态配置
+export const LOGIC_GATE_STATES = {
+  true: {
+    label: '真',
+    color: '#67C23A',
+    bgColor: '#F0F9FF',
+    borderColor: '#529B2E'
+  },
+  false: {
+    label: '假',
+    color: '#F56C6C', 
+    bgColor: '#FEF0F0',
+    borderColor: '#C45656'
+  },
+  unknown: {
+    label: '未知',
+    color: '#909399',
+    bgColor: '#F5F7FA', 
+    borderColor: '#73767A'
+  }
+} as const
+
+// 逻辑门大小配置
+export const LOGIC_GATE_SIZES = {
+  small: {
+    width: 40,
+    height: 28,
+    fontSize: 12,
+    iconSize: 16
+  },
+  medium: {
+    width: 60,
+    height: 40,
+    fontSize: 14,
+    iconSize: 20
+  },
+  large: {
+    width: 80,
+    height: 54,
+    fontSize: 16,
+    iconSize: 24
+  }
+} as const
+
+// 故障树布局配置
+export const FAULT_TREE_LAYOUT = {
+  nodeWidth: 160,
+  nodeHeight: 80,
+  horizontalSpacing: 200,
+  verticalSpacing: 120,
+  levelHeight: 150,
+  minZoom: 0.2,
+  maxZoom: 3.0,
+  defaultZoom: 1.0
+} as const
+
+// workflow节点类型映射
+export const WORKFLOW_NODE_TYPES = {
+  'n8n-nodes-base.webhook': {
+    label: 'Webhook触发器',
+    category: 'trigger',
+    icon: 'Webhook',
+    color: '#409EFF'
+  },
+  'n8n-nodes-base.manualTrigger': {
+    label: '手动触发器', 
+    category: 'trigger',
+    icon: 'Click',
+    color: '#67C23A'
+  },
+  'n8n-nodes-base.if': {
+    label: '条件判断',
+    category: 'logic',
+    icon: 'Branch',
+    color: '#E6A23C'
+  },
+  'n8n-nodes-base.switch': {
+    label: '分支选择',
+    category: 'logic', 
+    icon: 'Switch',
+    color: '#E6A23C'
+  },
+  'n8n-nodes-base.code': {
+    label: '代码执行',
+    category: 'data',
+    icon: 'Code',
+    color: '#9B59B6'
+  },
+  'n8n-nodes-base.noOp': {
+    label: '无操作',
+    category: 'utility',
+    icon: 'NoOp',
+    color: '#95A5A6'
+  }
+} as const
+
+// 诊断操作符配置
+export const DIAGNOSIS_OPERATORS = {
+  equals: { symbol: '==', label: '等于' },
+  notEquals: { symbol: '!=', label: '不等于' },
+  larger: { symbol: '>', label: '大于' },
+  largerEqual: { symbol: '>=', label: '大于等于' },
+  smaller: { symbol: '<', label: '小于' },
+  smallerEqual: { symbol: '<=', label: '小于等于' },
+  contains: { symbol: '包含', label: '包含' },
+  notContains: { symbol: '不包含', label: '不包含' }
+} as const
+
+// 推理步骤类型
+export const REASONING_STEP_TYPES = {
+  INPUT: {
+    label: '输入检查',
+    color: '#909399',
+    icon: 'Input'
+  },
+  CONDITION: {
+    label: '条件判断', 
+    color: '#E6A23C',
+    icon: 'Condition'
+  },
+  LOGIC: {
+    label: '逻辑运算',
+    color: '#409EFF', 
+    icon: 'Logic'
+  },
+  OUTPUT: {
+    label: '输出结果',
+    color: '#67C23A',
+    icon: 'Output'
+  }
+} as const
+
+// 连线样式配置
+export const CONNECTION_STYLES = {
+  default: {
+    color: '#DCDFE6',
+    width: 2,
+    dashArray: 'none'
+  },
+  active: {
+    color: '#409EFF',
+    width: 3,
+    dashArray: 'none'
+  },
+  highlighted: {
+    color: '#F56C6C',
+    width: 4,
+    dashArray: 'none'
+  },
+  inactive: {
+    color: '#E4E7ED',
+    width: 1,
+    dashArray: '5,5'
+  }
+} as const
+
+// 导出格式配置
+export const EXPORT_FORMATS = {
+  PNG: {
+    label: 'PNG图片',
+    extension: '.png',
+    mimeType: 'image/png'
+  },
+  JPG: {
+    label: 'JPG图片', 
+    extension: '.jpg',
+    mimeType: 'image/jpeg'
+  },
+  SVG: {
+    label: 'SVG矢量图',
+    extension: '.svg',
+    mimeType: 'image/svg+xml'
+  },
+  JSON: {
+    label: 'JSON数据',
+    extension: '.json', 
+    mimeType: 'application/json'
+  }
+} as const
+
+// 动画配置
+export const ANIMATIONS = {
+  nodeHover: {
+    duration: 300,
+    easing: 'ease-in-out',
+    scale: 1.05
+  },
+  stateChange: {
+    duration: 500,
+    easing: 'ease-out',
+    glow: true
+  },
+  pathHighlight: {
+    duration: 1000,
+    easing: 'ease-in-out',
+    delay: 200
+  }
+} as const
+
+// 调试模式配置
+export const DEBUG_CONFIG = {
+  showNodeIds: false,
+  showConnectionIds: false,
+  logWorkflowParsing: true,
+  logStateChanges: true,
+  showPerformanceMetrics: false
+} as const

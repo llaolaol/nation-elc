@@ -26,6 +26,11 @@
             <el-icon><Share /></el-icon>
             <span>故障树预览</span>
           </el-menu-item>
+
+          <el-menu-item index="/test1">
+            <el-icon><TrendCharts /></el-icon>
+            <span>故障树展示</span>
+          </el-menu-item>
           
           <el-menu-item index="/diagnosis">
             <el-icon><Operation /></el-icon>
@@ -54,7 +59,7 @@
 
 <script setup lang="ts">
 // 导入Element Plus图标组件
-import { Document, Share, Operation, Histogram, Camera } from '@element-plus/icons-vue'
+import { Document, Share, Operation, Histogram, Camera, TrendCharts } from '@element-plus/icons-vue'
 </script>
 
 <style scoped>

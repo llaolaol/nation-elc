@@ -273,3 +273,127 @@ export interface ImageUploadProgress {
   status: 'pending' | 'uploading' | 'success' | 'error';
   error_message?: string;     // 错误信息
 }
+
+// ================== 逻辑门相关类型定义 ==================
+
+/**
+ * @description 逻辑门类型
+ */
+export type LogicGateType = 'AND' | 'OR' | 'NOT';
+
+/**
+ * @description 逻辑门状态
+ */
+export type LogicGateState = 'true' | 'false' | 'unknown';
+
+/**
+ * @description 逻辑门节点
+ */
+export interface LogicGateNode {
+  id: string;
+  type: 'logic_gate';
+  gate_type: LogicGateType;
+  name: string;
+  description?: string;
+  condition?: string;           // 判断条件表达式
+  state: LogicGateState;        // 当前状态
+  input_nodes: string[];        // 输入节点ID列表
+  output_nodes: string[];       // 输出节点ID列表
+  position?: {
+    x: number;
+    y: number;
+  };
+}
+
+/**
+ * @description 增强版故障树节点
+ */
+export interface EnhancedFaultTreeNode {
+  id: string;
+  name: string;
+  type: 'fault_node' | 'logic_gate';
+  level?: string;
+  description?: string;
+  recommendation?: string;
+  children?: EnhancedFaultTreeNode[];
+  parent_id?: string;
+  
+  // 逻辑门特有属性
+  gate_type?: LogicGateType;
+  state?: LogicGateState;
+  condition?: string;
+  input_nodes?: string[];        // 输入节点ID列表
+  output_nodes?: string[];       // 输出节点ID列表
+  
+  // 可视化属性
+  position?: {
+    x: number;
+    y: number;
+  };
+  style?: {
+    color?: string;
+    shape?: string;
+    size?: number;
+  };
+}
+
+/**
+ * @description Workflow节点信息
+ */
+export interface WorkflowNode {
+  id: string;
+  name: string;
+  type: string;
+  parameters?: any;
+  position?: number[];
+  connections?: {
+    main: Array<Array<{
+      node: string;
+      type: string;
+      index: number;
+    }>>;
+  };
+}
+
+/**
+ * @description 解析后的Workflow结构
+ */
+export interface ParsedWorkflow {
+  nodes: WorkflowNode[];
+  connections: Map<string, string[]>;
+  logic_gates: LogicGateNode[];
+  fault_tree: EnhancedFaultTreeNode;
+}
+
+/**
+ * @description 逻辑推理步骤
+ */
+export interface LogicReasoningStep {
+  step_id: string;
+  gate_id: string;
+  gate_type: LogicGateType;
+  condition: string;
+  inputs: {
+    id: string;
+    value: boolean;
+    source: string;
+  }[];
+  output: boolean;
+  reasoning: string;
+  timestamp: string;
+}
+
+/**
+ * @description 逻辑推理过程
+ */
+export interface LogicReasoningProcess {
+  process_id: string;
+  input_params: DiagnosisParams;
+  steps: LogicReasoningStep[];
+  final_result: {
+    conclusion: string;
+    confidence: number;
+    path: string[];
+  };
+  created_at: string;
+}

@@ -262,7 +262,7 @@
         </h4>
         <div class="images-grid">
           <div 
-            v-for="(image, index) in result.processed_images" 
+            v-for="image in result.processed_images" 
             :key="image.image_id"
             class="image-comparison"
           >
