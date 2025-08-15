@@ -2,8 +2,8 @@
 import type { DiagnosisParams, DiagnosisResult } from '@/types';
 import { parseN8nTextResponse, generateDiagnosisSummary, extractKeyMetrics } from '@/utils/textParser';
 
-// 更新为新的测试 webhook URL
-const N8N_WEBHOOK_URL = 'http://3.27.250.156:5678/webhook/power-fault-diagnosis-1';
+// 故障推理专用 n8n webhook URL
+const N8N_WEBHOOK_URL = 'https://n8n.bd.kxsz.net:9443/webhook/power-fault-diagnosis-1';
 
 /**
  * @description 调用n8n工作流执行故障诊断
