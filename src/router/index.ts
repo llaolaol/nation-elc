@@ -29,6 +29,11 @@ const router = createRouter({
       component: () => import('../views/DiagnosisHistory.vue'),
     },
     {
+      path: '/image-diagnosis',
+      name: 'ImageDiagnosis',
+      component: () => import('../views/ImageDiagnosis.vue'),
+    },
+    {
       path: '/test',
       name: 'TestPage',
       component: () => import('../views/TestView.vue'),

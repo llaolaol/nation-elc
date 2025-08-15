@@ -40,7 +40,7 @@ export default defineConfig({
     // 启用gzip压缩
     reportCompressedSize: true,
     // 减少打包体积
-    minify: 'terser'
+    minify: 'esbuild'
   },
   server: {
     // 开发服务器优化

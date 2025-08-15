@@ -33,14 +33,14 @@ const showRawText = ref(false); // 控制是否显示原始文本
 // --- 方法 ---
 
 // 根据严重性获取标签类型
-const getSeverityType = (severity?: string) => {
+const getSeverityType = (severity?: string): 'primary' | 'success' | 'info' | 'warning' | 'danger' => {
   switch (severity) {
     case '危急': return 'danger';
     case '严重': return 'danger';
     case '警告': return 'warning';
     case '注意': return 'info';
     case '正常': return 'success';
-    default: return '';
+    default: return 'primary';
   }
 };
 

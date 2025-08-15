@@ -19,4 +19,18 @@ export default defineConfigWithVueTs(
   pluginVue.configs['flat/essential'],
   vueTsConfigs.recommended,
   skipFormatting,
+  
+  // 自定义规则覆盖
+  {
+    rules: {
+      // 允许any类型（在某些场景下必要）
+      '@typescript-eslint/no-explicit-any': 'warn',
+      // 允许未使用的变量（特别是在开发阶段）
+      '@typescript-eslint/no-unused-vars': 'warn',
+      // 允许修改props（在某些Vue组件中可能需要）
+      'vue/no-mutating-props': 'warn',
+      // 允许空catch块（用于错误处理）
+      '@typescript-eslint/no-empty-function': 'off',
+    }
+  }
 )

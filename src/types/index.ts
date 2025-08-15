@@ -92,6 +92,21 @@ export interface DiagnosisResult {
 }
 
 /**
+ * @description 简化的诊断结果接口，用于模拟API和测试
+ */
+export interface SimplifiedDiagnosisResult {
+  transformer_id: string;
+  timestamp: string;
+  overall_conclusion: string;
+  severity: '正常' | '注意' | '警告' | '严重' | '危急';
+  severity_level: number;
+  findings_count: number;
+  aggregated_findings: AggregatedFinding[];
+  raw_findings: RawFinding[];
+  expert_suggestion: string;
+}
+
+/**
  * @description 故障诊断历史记录的单条记录结构
  */
 export interface DiagnosisRecord {
@@ -132,3 +147,129 @@ export interface EChartsNodeData {
 }
 
 export type ThreeRatioCode = [number, number, number];
+
+// ================== 图像诊断相关类型定义 ==================
+
+/**
+ * @description 图像诊断任务状态
+ */
+export type ImageTaskStatus = 'pending' | 'uploading' | 'processing' | 'completed' | 'failed';
+
+/**
+ * @description 图像类型
+ */
+export type ImageType = 'PRPD' | 'UHF' | 'TEV' | 'AE';
+
+/**
+ * @description 识别敏感度
+ */
+export type SensitivityLevel = 'low' | 'medium' | 'high';
+
+/**
+ * @description 设备信息
+ */
+export interface EquipmentInfo {
+  device_id: string;           // 设备编号
+  device_type: string;         // 设备类型
+  location: string;            // 设备位置
+}
+
+/**
+ * @description 图像诊断参数
+ */
+export interface ImageDiagnosisParams {
+  equipment_info: EquipmentInfo;
+  image_files: File[];
+  image_type: ImageType;
+  sensitivity: SensitivityLevel;
+}
+
+/**
+ * @description 处理后的图像信息
+ */
+export interface ProcessedImage {
+  image_id: string;            // 图像ID
+  original_name: string;       // 原始文件名
+  original_url: string;        // 原始图像URL
+  processed_url?: string;      // 处理后图像URL
+  annotations: ImageAnnotation[]; // 图像标注信息
+  file_size: number;           // 文件大小(字节)
+  dimensions: {                // 图像尺寸
+    width: number;
+    height: number;
+  };
+}
+
+/**
+ * @description 图像标注信息
+ */
+export interface ImageAnnotation {
+  annotation_id: string;       // 标注ID
+  type: 'bbox' | 'point' | 'polygon'; // 标注类型
+  coordinates: number[];       // 坐标信息
+  label: string;              // 标注标签
+  confidence: number;         // 置信度
+  description?: string;       // 描述信息
+}
+
+/**
+ * @description 图像诊断结果
+ */
+export interface ImageDiagnosisResult {
+  task_id: string;            // 任务ID
+  equipment_info: EquipmentInfo; // 设备信息
+  image_analysis: {
+    discharge_type: string;    // 放电类型
+    severity_level: number;    // 严重程度(1-5)
+    confidence_score: number;  // 整体置信度
+    fault_location: string;    // 故障位置
+    fault_probability: number; // 故障概率
+  };
+  ai_insights: string[];      // AI洞察
+  recommended_actions: string[]; // 推荐措施
+  processed_images: ProcessedImage[]; // 处理后的图像
+  diagnosis_time: string;     // 诊断时间
+  processing_duration: number; // 处理耗时(秒)
+  technical_details?: {       // 技术细节(可选)
+    algorithm_version: string;
+    model_confidence: number;
+    processing_steps: string[];
+  };
+  detailed_analysis?: {       // 详细分析内容(可选)
+    full_content: string;     // 完整分析内容
+    structured_content: {     // 结构化内容
+      featureAnalysis: string;
+      dischargeCharacteristics: string;
+      comprehensiveJudgment: string;
+    };
+    annotations: any[];       // 标注信息
+  };
+}
+
+/**
+ * @description 图像诊断任务
+ */
+export interface ImageDiagnosisTask {
+  task_id: string;            // 任务ID
+  status: ImageTaskStatus;    // 任务状态
+  created_at: string;         // 创建时间
+  updated_at: string;         // 更新时间
+  started_at?: string;        // 开始处理时间
+  completed_at?: string;      // 完成时间
+  params: ImageDiagnosisParams; // 诊断参数
+  progress: number;           // 进度百分比(0-100)
+  current_step?: string;      // 当前处理步骤
+  result?: ImageDiagnosisResult; // 诊断结果
+  error_message?: string;     // 错误信息
+  retry_count: number;        // 重试次数
+}
+
+/**
+ * @description 图像上传进度
+ */
+export interface ImageUploadProgress {
+  file_name: string;          // 文件名
+  progress: number;           // 上传进度(0-100)
+  status: 'pending' | 'uploading' | 'success' | 'error';
+  error_message?: string;     // 错误信息
+}

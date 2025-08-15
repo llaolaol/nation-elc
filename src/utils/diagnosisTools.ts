@@ -1,5 +1,5 @@
 // 故障诊断工具类
-import type { DiagnosisParams, DiagnosisResult, ThreeRatioCode } from '@/types'
+import type { DiagnosisParams, DiagnosisResult, SimplifiedDiagnosisResult } from '@/types'
 
 /**
  * 气体比值计算器
@@ -309,10 +309,10 @@ export class DiagnosisDecisionMaker {
    */
   static fuseDiagnosisResults(
     results: Array<{ result: Partial<DiagnosisResult>; weight: number }>
-  ): DiagnosisResult {
+  ): SimplifiedDiagnosisResult {
     // 计算加权平均置信度
     const totalWeight = results.reduce((sum, item) => sum + item.weight, 0)
-    const avgConfidence = results.reduce(
+    results.reduce(
       (sum, item) => sum + (item.result.confidence || 0) * item.weight,
       0
     ) / totalWeight
@@ -333,14 +333,7 @@ export class DiagnosisDecisionMaker {
       findings_count: 1,
       aggregated_findings: [],
       raw_findings: [],
-      expert_suggestion: primaryResult.result.recommendation || '建议进一步检测',
-      fault_type: primaryResult.result.fault_type || '未知故障',
-      diagnosis: primaryResult.result.diagnosis || '诊断信息不足',
-      recommendation: primaryResult.result.recommendation || '建议进一步检测',
-      confidence: Math.min(avgConfidence, 1.0),
-      three_ratio_code: primaryResult.result.three_ratio_code,
-      co_co2_ratio: primaryResult.result.co_co2_ratio,
-      h2_only: primaryResult.result.h2_only
+      expert_suggestion: primaryResult.result.recommendation || '建议进一步检测'
     }
   }
 

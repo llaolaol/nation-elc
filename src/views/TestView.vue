@@ -6,7 +6,7 @@ import {
   ElRadio, ElForm, ElFormItem, ElInput, ElDivider, ElSpace, ElCollapse, ElCollapseItem,
   ElIcon
 } from 'element-plus';
-import type { DiagnosisResult, DiagnosisParams, FaultCategory, ParameterAcquisitionMethod, RawFinding, AggregatedFinding, FaultTreeNode } from '@/types';
+import type { SimplifiedDiagnosisResult, DiagnosisParams, FaultCategory, ParameterAcquisitionMethod, RawFinding, AggregatedFinding, FaultTreeNode } from '@/types';
 import VueECharts from 'vue-echarts';
 import { use } from 'echarts/core';
 import { TreeChart } from 'echarts/charts';
@@ -75,7 +75,7 @@ const presetParams: DiagnosisParams = {
 };
 
 // 诊断结果和排查路径展示
-const currentDiagnosisResult = ref<DiagnosisResult | null>(null);
+const currentDiagnosisResult = ref<(SimplifiedDiagnosisResult & { highlighted_nodes: string[] }) | null>(null);
 const faultTreeOption = ref({}); // ECharts 故障树图表配置
 
 // --- 辅助数据 ---
@@ -87,14 +87,6 @@ const faultCategories = [
 
 // --- 方法 ---
 
-const getSeverityTagTypeOriginal = (severity: string) => {
-  switch (severity) {
-    case '危急': case '严重': return 'danger';
-    case '警告': return 'warning';
-    case '注意': return 'info';
-    default: return 'success';
-  }
-};
 
 // 应用预设参数
 const applyPresetParams = () => {
@@ -107,11 +99,11 @@ const applyPresetParams = () => {
  * 根据输入参数和变电站逻辑推理0805.json的规则生成诊断结果
  * 同时返回高亮节点列表
  */
-const simulateDiagnosis = async (params: DiagnosisParams): Promise<DiagnosisResult & { highlighted_nodes: string[] }> => {
+const simulateDiagnosis = async (params: DiagnosisParams): Promise<SimplifiedDiagnosisResult & { highlighted_nodes: string[] }> => {
   await new Promise(resolve => setTimeout(resolve, 500)); // 模拟网络延迟
 
   let overall_conclusion = '未检测到明显故障特征。';
-  let severity: DiagnosisResult['severity'] = '正常';
+  let severity: SimplifiedDiagnosisResult['severity'] = '正常';
   let severity_level = 0;
   const raw_findings: RawFinding[] = [];
   const aggregated_findings: AggregatedFinding[] = [];
@@ -272,7 +264,7 @@ const simulateDiagnosis = async (params: DiagnosisParams): Promise<DiagnosisResu
  * 模拟故障树路径高亮 (纯前端实现)
  * 根据诊断结果来高亮 fault_tree_hierarchy.json 中的路径
  */
-const simulateFaultTreePath = (result: DiagnosisResult & { highlighted_nodes: string[] }) => {
+const simulateFaultTreePath = (result: SimplifiedDiagnosisResult & { highlighted_nodes: string[] }) => {
   const treeData: FaultTreeNode[] = JSON.parse(JSON.stringify(faultTreeHierarchyData)); // 深拷贝，避免修改原始数据
 
   function traverseAndHighlight(node: FaultTreeNode) {
@@ -520,7 +512,7 @@ const extractRecommendations = (text: string): string[] => {
   console.log('🔍 提取推荐措施 - 文本长度:', text.length)
   console.log('🔍 文本前500字符:', text.substring(0, 500))
   
-  const recommendations = []
+  const recommendations: string[] = []
   
   // 更详细的关键词匹配，增加调试信息
   const keywordChecks = [

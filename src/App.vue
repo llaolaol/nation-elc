@@ -32,6 +32,11 @@
             <span>故障推理</span>
           </el-menu-item>
 
+          <el-menu-item index="/image-diagnosis">
+            <el-icon><Camera /></el-icon>
+            <span>图像诊断</span>
+          </el-menu-item>
+
           <el-menu-item index="/history">
             <el-icon><Histogram /></el-icon>
             <span>诊断历史</span>
@@ -49,7 +54,7 @@
 
 <script setup lang="ts">
 // 导入Element Plus图标组件
-import { Document, Share, Operation, Histogram, HomeFilled } from '@element-plus/icons-vue'
+import { Document, Share, Operation, Histogram, Camera } from '@element-plus/icons-vue'
 </script>
 
 <style scoped>
