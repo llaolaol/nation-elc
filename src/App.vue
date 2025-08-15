@@ -31,6 +31,11 @@
             <el-icon><TrendCharts /></el-icon>
             <span>故障树展示</span>
           </el-menu-item>
+
+          <el-menu-item index="/fault-tree-management">
+            <el-icon><Management /></el-icon>
+            <span>故障树管理</span>
+          </el-menu-item>
           
           <el-menu-item index="/diagnosis">
             <el-icon><Operation /></el-icon>
@@ -59,7 +64,7 @@
 
 <script setup lang="ts">
 // 导入Element Plus图标组件
-import { Document, Share, Operation, Histogram, Camera, TrendCharts } from '@element-plus/icons-vue'
+import { Document, Share, Operation, Histogram, Camera, TrendCharts, Management } from '@element-plus/icons-vue'
 </script>
 
 <style scoped>

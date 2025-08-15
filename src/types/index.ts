@@ -397,3 +397,141 @@ export interface LogicReasoningProcess {
   };
   created_at: string;
 }
+
+// ================== 故障树管理相关类型定义 ==================
+
+/**
+ * @description 故障树项目状态
+ */
+export type FaultTreeStatus = 'draft' | 'active' | 'archived' | 'template';
+
+/**
+ * @description 故障树操作权限
+ */
+export interface FaultTreePermission {
+  canView: boolean;
+  canEdit: boolean;
+  canDelete: boolean;
+  canExport: boolean;
+  canClone: boolean;
+}
+
+/**
+ * @description 故障树元数据
+ */
+export interface FaultTreeMetadata {
+  id: string;
+  name: string;
+  description?: string;
+  status: FaultTreeStatus;
+  category: string;              // 故障类别（变压器、开关等）
+  equipment_type: string;        // 设备类型
+  version: string;               // 版本号
+  created_by: string;            // 创建人
+  created_at: string;            // 创建时间
+  updated_by: string;            // 更新人
+  updated_at: string;            // 更新时间
+  tags: string[];               // 标签
+  node_count: number;           // 节点总数
+  gate_count: number;           // 逻辑门数量
+  depth: number;                // 树的深度
+  is_template: boolean;         // 是否为模板
+  permissions: FaultTreePermission; // 权限设置
+}
+
+/**
+ * @description 故障树完整数据
+ */
+export interface FaultTreeData {
+  metadata: FaultTreeMetadata;
+  tree: EnhancedFaultTreeNode;
+  layout_config?: {
+    default_layout: string;
+    custom_positions?: Map<string, { x: number; y: number }>;
+    zoom_level?: number;
+    center_point?: { x: number; y: number };
+  };
+}
+
+/**
+ * @description 故障树操作历史记录
+ */
+export interface FaultTreeOperation {
+  id: string;
+  tree_id: string;
+  operation_type: 'create' | 'update' | 'delete' | 'clone' | 'export' | 'import';
+  operation_details: string;
+  performed_by: string;
+  performed_at: string;
+  affected_nodes?: string[];     // 受影响的节点ID列表
+  before_snapshot?: string;      // 操作前快照（JSON）
+  after_snapshot?: string;       // 操作后快照（JSON）
+}
+
+/**
+ * @description 节点操作类型
+ */
+export type NodeOperationType = 'add_child' | 'add_sibling' | 'edit' | 'delete' | 'move' | 'change_type';
+
+/**
+ * @description 节点操作参数
+ */
+export interface NodeOperation {
+  type: NodeOperationType;
+  node_id?: string;              // 目标节点ID（编辑、删除时）
+  parent_id?: string;            // 父节点ID（添加时）
+  position?: number;             // 插入位置（添加兄弟节点时）
+  data?: Partial<EnhancedFaultTreeNode>; // 节点数据（添加、编辑时）
+}
+
+/**
+ * @description 故障树搜索过滤条件
+ */
+export interface FaultTreeFilter {
+  keyword?: string;             // 关键词搜索
+  status?: FaultTreeStatus[];   // 状态筛选
+  category?: string[];          // 类别筛选
+  equipment_type?: string[];    // 设备类型筛选
+  created_by?: string[];        // 创建人筛选
+  tags?: string[];              // 标签筛选
+  date_range?: {                // 创建时间范围
+    start: string;
+    end: string;
+  };
+  node_count_range?: {          // 节点数量范围
+    min: number;
+    max: number;
+  };
+}
+
+/**
+ * @description 故障树导入导出选项
+ */
+export interface FaultTreeIOOptions {
+  format: 'json' | 'xml' | 'excel' | 'pdf';
+  include_metadata: boolean;    // 是否包含元数据
+  include_layout: boolean;      // 是否包含布局信息
+  include_history: boolean;     // 是否包含操作历史
+  compress: boolean;            // 是否压缩
+}
+
+/**
+ * @description 故障树验证结果
+ */
+export interface FaultTreeValidation {
+  is_valid: boolean;
+  errors: {
+    type: 'structure' | 'logic' | 'data';
+    node_id?: string;
+    message: string;
+    severity: 'error' | 'warning' | 'info';
+  }[];
+  suggestions: string[];
+  statistics: {
+    total_nodes: number;
+    fault_nodes: number;
+    logic_gates: number;
+    max_depth: number;
+    isolated_nodes: number;
+  };
+}

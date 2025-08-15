@@ -43,6 +43,11 @@ const router = createRouter({
       name: 'Test1Page',
       component: () => import('../views/Test1View.vue'),
     },
+    {
+      path: '/fault-tree-management',
+      name: 'FaultTreeManagement',
+      component: () => import('../views/FaultTreeManagement.vue'),
+    },
   ],
 })
 

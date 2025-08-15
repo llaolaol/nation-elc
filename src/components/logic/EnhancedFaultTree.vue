@@ -404,20 +404,31 @@ onMounted(async () => {
 const renderTree = async () => {
   try {
     let faultTree: EnhancedFaultTreeNode | null = null
+    
+    console.log('EnhancedFaultTree - renderTree 开始')
+    console.log('workflowData:', props.workflowData)
+    console.log('faultTreeData:', props.faultTreeData)
 
     if (props.workflowData) {
       // 从workflow数据生成故障树
       parsedWorkflow.value = parser.parseWorkflow(props.workflowData)
       faultTree = parsedWorkflow.value.fault_tree
+      console.log('使用workflow数据, 生成的faultTree:', faultTree)
     } else if (props.faultTreeData) {
       // 直接使用提供的故障树数据
       faultTree = props.faultTreeData
+      console.log('使用提供的faultTreeData:', faultTree)
     }
 
     if (faultTree) {
+      console.log('开始渲染HTML结构, layout:', selectedLayout.value)
       renderedTreeHTML.value = renderer.createHTMLStructure(faultTree, selectedLayout.value)
+      console.log('渲染完成, HTML长度:', renderedTreeHTML.value.length)
       await nextTick()
       attachEventListeners()
+    } else {
+      console.log('没有有效的故障树数据')
+      renderedTreeHTML.value = '<div class="empty-message">无故障树数据</div>'
     }
   } catch (error) {
     console.error('渲染故障树失败:', error)
