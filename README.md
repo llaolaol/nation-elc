@@ -19,27 +19,30 @@
 
 ## 技术栈
 
-### 前端框架
-- **Vue 3** - 渐进式 JavaScript 框架
-- **TypeScript** - 类型安全的 JavaScript 超集
-- **Vite** - 快速的前端构建工具
+### 🛠️ 前端技术栈
+- **Vue 3.5.18** - 现代渐进式 JavaScript 框架，采用 Composition API
+- **TypeScript 5.8.0** - 类型安全的 JavaScript 超集，提供完整类型支持
+- **Vite 7.0.6** - 新一代前端构建工具，极速热更新
 
-### UI 组件与样式
-- **Element Plus** - 基于 Vue 3 的组件库
-- **ECharts** + **vue-echarts** - 数据可视化图表库
+### 🎨 UI 框架与可视化
+- **Element Plus 2.10.5** - 专业的 Vue 3 企业级组件库
+- **@element-plus/icons-vue 2.3.1** - Element Plus 官方图标库
+- **ECharts 5.6.0** - 百度开源的数据可视化图表库
+- **vue-echarts 7.0.3** - ECharts 的 Vue 3 组件封装
 
-### 状态管理与路由
-- **Pinia** - Vue 3 官方状态管理库
-- **Vue Router** - Vue.js 官方路由管理器
+### 📦 状态管理与路由
+- **Pinia 3.0.3** - Vue 3 官方推荐的现代状态管理库
+- **Vue Router 4.5.1** - Vue 3 官方路由管理器
 
-### 文档处理
-- **PDF.js** - PDF 文档解析和展示
-- **xlsx** - Excel 文档处理库
+### 📄 文档与数据处理
+- **PDF.js 5.4.54** - Mozilla 开源的 PDF 解析和渲染库
+- **xlsx 0.18.5** - Excel 文档读写处理库
 
-### 开发工具
-- **ESLint** - 代码质量检查
-- **Prettier** - 代码格式化
-- **TypeScript** - 类型检查
+### 🔧 开发工具链
+- **ESLint 9.31.0** - JavaScript/TypeScript 代码质量检查工具
+- **Prettier 3.6.2** - 代码格式化工具，确保代码风格统一
+- **Vue DevTools 8.0.0** - Vue 3 专用浏览器调试工具
+- **npm-run-all2** - 并行执行 npm 脚本工具
 
 ## 功能模块
 
@@ -91,67 +94,96 @@
 
 ### 核心技术栈
 
-**前端框架**: Vue 3 + TypeScript + Vite  
-**UI组件库**: Element Plus + @element-plus/icons-vue  
-**图表可视化**: ECharts + vue-echarts  
-**状态管理**: Pinia  
-**路由管理**: Vue Router  
-**文档处理**: PDF.js + xlsx  
-**开发工具**: ESLint + Prettier + Vue DevTools  
+**前端框架**: Vue 3.5.18 + TypeScript 5.8.0 + Vite 7.0.6  
+**UI组件库**: Element Plus 2.10.5 + @element-plus/icons-vue 2.3.1  
+**图表可视化**: ECharts 5.6.0 + vue-echarts 7.0.3  
+**状态管理**: Pinia 3.0.3  
+**路由管理**: Vue Router 4.5.1  
+**文档处理**: PDF.js 5.4.54 + xlsx 0.18.5  
+**开发工具**: ESLint 9.31.0 + Prettier 3.6.2 + Vue DevTools 8.0.0  
 
 ### 项目结构
 
 ```
-fault-diagnosis-system/
-├── public/                          # 静态资源
-├── src/
-│   ├── assets/                     # 静态资源文件
-│   ├── components/                 # Vue 组件
-│   │   ├── common/                # 通用组件
-│   │   │   ├── ErrorBoundary.vue  # 错误边界组件
-│   │   │   ├── LoadingComponent.vue # 加载组件
-│   │   │   ├── SmartForm.vue      # 智能表单组件
-│   │   │   └── SmartTable.vue     # 智能表格组件
-│   │   ├── icons/                 # 图标组件
-│   │   ├── image/                 # 图像诊断相关组件
-│   │   │   ├── ImageUploader.vue  # 图像上传组件
-│   │   │   ├── ResultDisplay.vue  # 结果展示组件
-│   │   │   └── TaskManager.vue    # 任务管理组件
-│   │   └── logic/                 # 逻辑门相关组件
-│   │       ├── EnhancedFaultTree.vue    # 增强故障树组件
-│   │       ├── LogicGateIcon.vue        # 逻辑门图标组件
-│   │       └── LogicGateNode.vue        # 逻辑门节点组件
-│   ├── router/                    # 路由配置
-│   ├── services/                  # API 服务层
-│   │   ├── diagnosis.ts          # 故障诊断服务
-│   │   ├── imageDiagnosis.ts     # 图像诊断服务
-│   │   ├── mockApi.v2.ts         # 模拟 API 服务
-│   │   ├── visualization.ts      # 可视化服务
-│   │   └── workflowParser.ts     # 工作流解析服务
-│   ├── stores/                   # Pinia 状态管理
-│   ├── types/                    # TypeScript 类型定义
-│   │   └── index.ts             # 统一类型定义文件
-│   ├── utils/                    # 工具函数
-│   │   ├── diagnosisTools.ts     # 诊断工具函数
-│   │   ├── faultTreeParser.ts    # 故障树解析工具
-│   │   ├── logicGateRenderer.ts  # 逻辑门渲染器
-│   │   └── textParser.ts         # 文本解析工具
-│   ├── views/                    # 页面组件
-│   │   ├── FaultDiagnosis.vue           # 故障推理页面
-│   │   ├── FaultTreePreview.vue         # 故障树预览页面
-│   │   ├── Test1View.vue                # 故障树展示页面
-│   │   ├── FaultTreeManagement.vue      # 故障树管理页面
-│   │   ├── ImageDiagnosis.vue           # 图像诊断页面
-│   │   ├── DiagnosisHistory.vue         # 诊断历史页面
-│   │   ├── DocumentManagement.vue       # 文档管理页面
-│   │   └── HomeView.vue                 # 首页
-│   ├── App.vue                   # 根组件
-│   └── main.ts                   # 应用入口
-├── .claude/                      # Claude AI 配置
-├── package.json                  # 项目依赖配置
-├── tsconfig.json                # TypeScript 配置
-├── vite.config.ts               # Vite 构建配置
-└── README.md                    # 项目说明文档
+fault-diagnosis-system/                 # 🏗️ 项目根目录
+├── 📁 public/                          # 静态资源目录
+│   └── favicon.ico                     # 网站图标
+├── 📁 src/                            # 源代码目录
+│   ├── 📁 assets/                     # 静态资源文件
+│   │   ├── base.css                   # 基础样式
+│   │   ├── logo.svg                   # Logo 图标
+│   │   └── main.css                   # 主样式文件
+│   ├── 📁 components/                 # Vue 组件目录
+│   │   ├── 📁 common/                # 🔧 通用组件
+│   │   │   ├── ErrorBoundary.vue     # 错误边界处理组件
+│   │   │   ├── LoadingComponent.vue  # 加载状态组件
+│   │   │   ├── SmartForm.vue         # 智能表单组件
+│   │   │   └── SmartTable.vue        # 智能表格组件
+│   │   ├── 📁 icons/                 # 🎨 图标组件库
+│   │   │   ├── IconCommunity.vue     # 社区图标
+│   │   │   ├── IconDocumentation.vue # 文档图标
+│   │   │   ├── IconEcosystem.vue     # 生态图标
+│   │   │   ├── IconSupport.vue       # 支持图标
+│   │   │   └── IconTooling.vue       # 工具图标
+│   │   ├── 📁 image/                 # 🖼️ 图像诊断组件
+│   │   │   ├── ImageUploader.vue     # 图像上传处理组件
+│   │   │   ├── ResultDisplay.vue     # 诊断结果展示组件
+│   │   │   └── TaskManager.vue       # 任务队列管理组件
+│   │   ├── 📁 logic/                 # 🧠 逻辑门组件
+│   │   │   ├── EnhancedFaultTree.vue # 增强型故障树可视化
+│   │   │   ├── LogicGateIcon.vue     # 逻辑门图标组件
+│   │   │   └── LogicGateNode.vue     # 逻辑门节点组件
+│   │   ├── HelloWorld.vue            # 默认示例组件
+│   │   ├── TheWelcome.vue            # 欢迎页组件
+│   │   └── WelcomeItem.vue           # 欢迎项组件
+│   ├── 📁 composables/               # 🎣 Vue 3 组合式函数
+│   │   ├── useForm.ts               # 表单处理 Hook
+│   │   ├── useLoading.ts            # 加载状态 Hook
+│   │   └── useTableData.ts          # 表格数据 Hook
+│   ├── 📁 constants/                 # 📋 常量定义
+│   │   └── index.ts                 # 统一常量导出
+│   ├── 📁 router/                    # 🛤️ 路由配置
+│   │   └── index.ts                 # 路由定义文件
+│   ├── 📁 services/                  # 🌐 API 服务层
+│   │   ├── diagnosis.ts             # 故障诊断API服务
+│   │   ├── imageDiagnosis.ts        # 图像诊断API服务
+│   │   ├── mockApi.v2.ts            # 模拟API服务
+│   │   ├── visualization.ts         # 可视化数据服务
+│   │   └── workflowParser.ts        # n8n工作流解析服务
+│   ├── 📁 stores/                   # 🏪 Pinia 状态管理
+│   │   └── counter.ts              # 计数器状态示例
+│   ├── 📁 types/                    # 📝 TypeScript 类型定义
+│   │   └── index.ts                # 统一类型定义导出
+│   ├── 📁 utils/                    # 🛠️ 工具函数库
+│   │   ├── diagnosisTools.ts        # 故障诊断工具函数
+│   │   ├── faultTreeParser.ts       # 故障树数据解析器
+│   │   ├── logicGateRenderer.ts     # 逻辑门渲染引擎
+│   │   └── textParser.ts            # 文本解析工具
+│   ├── 📁 views/                    # 📄 页面组件
+│   │   ├── AboutView.vue            # 关于页面
+│   │   ├── DiagnosisHistory.vue     # 诊断历史管理页
+│   │   ├── DocumentManagement.vue   # 文档管理页面
+│   │   ├── FaultDiagnosis.vue       # 故障推理诊断页
+│   │   ├── FaultTreeManagement.vue  # 故障树管理页面
+│   │   ├── FaultTreePreview.vue     # 故障树预览页面
+│   │   ├── HomeView.vue             # 系统首页
+│   │   ├── ImageDiagnosis.vue       # 图像AI诊断页
+│   │   ├── Test1View.vue            # 故障树展示页面
+│   │   └── TestView.vue             # 测试页面
+│   ├── App.vue                      # 🎯 根组件
+│   └── main.ts                      # 🚀 应用程序入口
+├── 📁 .claude/                      # 🤖 Claude AI 配置
+├── 📁 .vscode/                      # VS Code 配置
+├── env.d.ts                         # 环境变量类型定义
+├── eslint.config.ts                 # ESLint 配置文件
+├── index.html                       # HTML 入口文件
+├── package.json                     # 📦 项目依赖配置
+├── package-lock.json               # 依赖锁定文件
+├── tsconfig.json                    # TypeScript 根配置
+├── tsconfig.app.json               # 应用 TS 配置
+├── tsconfig.node.json              # Node.js TS 配置
+├── vite.config.ts                  # ⚡ Vite 构建配置
+└── README.md                       # 📖 项目说明文档
 ```
 
 ## API 集成说明
@@ -428,12 +460,16 @@ npm run build
 ### 可用脚本
 
 ```bash
-npm run dev          # 启动开发服务器 (默认端口: 5173)
-npm run build        # 构建生产版本
-npm run preview      # 预览生产构建
-npm run type-check   # TypeScript 类型检查
-npm run lint         # ESLint 代码检查
-npm run format       # Prettier 代码格式化
+# 开发相关命令
+npm run dev          # 🚀 启动开发服务器 (默认端口: 5173)
+npm run build        # 📦 构建生产版本到 dist/ 目录
+npm run build-only   # 🔨 仅构建，不进行类型检查
+npm run preview      # 👀 预览生产构建版本
+
+# 代码质量检查
+npm run type-check   # 📝 TypeScript 类型检查
+npm run lint         # 🔍 ESLint 代码质量检查并自动修复
+npm run format       # 🎨 Prettier 代码格式化
 ```
 
 ### 🚀 快速开始指南
@@ -469,10 +505,16 @@ npm run dev
 
 ### 🛠️ 开发环境配置
 
+**系统环境要求**：
+- **Node.js**: ^20.19.0 || >=22.12.0 (推荐 v22.12.0+)
+- **npm**: 最新稳定版本 (随 Node.js 安装)
+- **操作系统**: Windows 10+, macOS 12+, Linux (Ubuntu 20.04+)
+
 **推荐开发工具**：
-- **IDE**: VSCode + Volar 插件
-- **Node.js**: v20.19.0+ 或 v22.12.0+
-- **浏览器**: Chrome/Edge (支持Vue DevTools)
+- **IDE**: VSCode + Volar 插件 (替代 Vetur)
+- **浏览器**: Chrome/Edge 最新版本 (支持 Vue DevTools 3.x)
+- **终端**: 支持 Unicode 的现代终端 (Windows Terminal, iTerm2)
+- **Git**: 版本控制工具 (v2.30+)
 
 ### 代码规范
 
@@ -620,20 +662,28 @@ VITE_APP_VERSION=2.0.0
 
 #### 1. 静态文件部署
 
-系统构建为纯静态文件，支持多种部署方式：
+系统采用 SPA (单页应用) 架构，构建为纯静态文件，支持多种部署方式：
 
 ```bash
 # 构建生产版本
 npm run build
 
-# dist/ 目录包含所有静态文件
+# 构建完成后的 dist/ 目录结构
 dist/
-├── index.html
-├── assets/
-│   ├── index-[hash].js
-│   ├── index-[hash].css
-│   └── [other-assets]
-└── [static-files]
+├── index.html                    # 主 HTML 文件
+├── assets/                       # 资源文件目录
+│   ├── index-[hash].js          # 主 JavaScript 包
+│   ├── index-[hash].css         # 主样式文件
+│   ├── [component]-[hash].js    # 组件懒加载包
+│   └── [other-assets]           # 其他静态资源
+├── favicon.ico                   # 网站图标
+└── [other-static-files]         # 其他静态文件
+
+# 文件大小优化
+- JavaScript 包已开启 Tree Shaking
+- CSS 已开启自动前缀和压缩
+- 图片资源已优化压缩
+- 支持 Gzip/Brotli 压缩
 ```
 
 #### 2. 推荐部署平台
@@ -656,15 +706,78 @@ dist/
 - **CDN部署**: 阿里云OSS、腾讯云COS等
 - **容器化**: Docker + Nginx
 
-#### 3. Docker部署示例
+#### 3. Docker 容器化部署
 
+**多阶段 Dockerfile**:
 ```dockerfile
-# Dockerfile
-FROM nginx:alpine
-COPY dist/ /usr/share/nginx/html/
+# 构建阶段
+FROM node:22-alpine AS builder
+WORKDIR /app
+
+# 复制依赖文件并安装
+COPY package*.json ./
+RUN npm ci --only=production
+
+# 复制源代码并构建
+COPY . .
+RUN npm run build
+
+# 生产阶段
+FROM nginx:alpine AS production
+
+# 复制自定义 nginx 配置
 COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# 复制构建产物
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+# 健康检查
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost/ || exit 1
+
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
+```
+
+**nginx.conf 配置**:
+```nginx
+server {
+    listen 80;
+    server_name _;
+    root /usr/share/nginx/html;
+    index index.html;
+    
+    # 支持 Vue Router 的 History 模式
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+    
+    # 静态资源缓存
+    location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2)$ {
+        expires 1y;
+        add_header Cache-Control "public, no-transform";
+    }
+    
+    # 启用 Gzip 压缩
+    gzip on;
+    gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
+}
+```
+
+**Docker Compose 部署**:
+```yaml
+# docker-compose.yml
+version: '3.8'
+services:
+  fault-diagnosis-web:
+    build: .
+    ports:
+      - "80:80"
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    volumes:
+      - ./logs:/var/log/nginx
 ```
 
 ## 📊 系统特色亮点
