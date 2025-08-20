@@ -1,3 +1,15 @@
+---
+title: 国网故障诊断系统
+emoji: ⚡
+colorFrom: blue
+colorTo: green
+sdk: gradio
+sdk_version: 4.44.0
+app_file: app.py
+pinned: false
+license: mit
+---
+
 # 国网故障诊断系统 (State Grid Fault Diagnosis System)
 
 基于逻辑门和 n8n 工作流的智能化电力设备故障诊断系统，提供全面的变压器故障分析、可视化和管理功能。
